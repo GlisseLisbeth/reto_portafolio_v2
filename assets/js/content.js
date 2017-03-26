@@ -1,4 +1,4 @@
-window.addEventListener('load',function(){
+//window.addEventListener('load',function(){
   var arrHeaders = ["dmngbgr00.thoughtworks.com          |<span>ide          |</span><span>192.168.0.1    |</span>        var/lib/cruise-agent",
   "dmngbgr01.thoughtworks.com          |<span>building          |</span><span>192.168.0.1    |</span>        var/lib/cruise-agent",
   "dmngbgr02.thoughtworks.com          |<span>building          |</span><span>192.168.0.1    |</span>        var/lib/cruise-agent",
@@ -38,12 +38,16 @@ window.addEventListener('load',function(){
     var addButtonResource = document.createElement("button");
     addButtonResource.setAttribute("id","add");
     addButtonResource.setAttribute("type","button");
-    addButtonResource.innerHTML= "Add resources";
+    addButtonResource.setAttribute("class","button-resource");
+    // addButtonResource.innerHTML= "Add resources";
+    addButtonResource.appendChild(document.createTextNode("Add resources"));
+
     toolTipInfo.appendChild(addButtonResource);
 
     var closeToolTip = document.createElement("button");
     closeToolTip.setAttribute("id","close");
     closeToolTip.setAttribute("type","button");
+    closeToolTip.setAttribute("class","button-resource");
     closeToolTip.innerHTML= "Close";
     toolTipInfo.appendChild(closeToolTip);
 
@@ -63,7 +67,6 @@ window.addEventListener('load',function(){
   }
 
   function addArticle(index,color){
-
     var sectionLeft = document.getElementById("left");
     sectionLeft.setAttribute("class","left");
 
@@ -134,4 +137,4 @@ window.addEventListener('load',function(){
     toolTipResource.removeChild(span);
   }
 
-});
+//});
