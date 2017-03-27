@@ -6,12 +6,7 @@
 
   arrHeaders.forEach(function(e,i) {
     var color;
-    if(i==0 || i == 3){
-      color = "green";
-    }
-    else{
-      color = "yellow";
-    }
+    (i==0 || i == 3) ? color = "green" : color = "yellow";
     addArticle(i,color);
   })
 
@@ -40,7 +35,6 @@
     addButtonResource.setAttribute("class","button-resource");
     // addButtonResource.innerHTML= "Add resources";
     addButtonResource.appendChild(document.createTextNode("Add resources"));
-
     toolTipInfo.appendChild(addButtonResource);
 
     var closeToolTip = document.createElement("button");
@@ -54,11 +48,13 @@
       e.preventDefault();
       addResource(toolTipResource,iToolTip.value);
       toolTipInfo.style.display = "none";
+      toolTip.removeChild(toolTipInfo);
+
     });
 
       closeToolTip.addEventListener('click',function(e){
       e.preventDefault();
-      toolTipInfo.style.display = "none";
+      toolTip.removeChild(toolTipInfo);
     });
 
     toolTip.appendChild(toolTipInfo);
@@ -112,7 +108,12 @@
 
     aSpecify.addEventListener("click", function(e){
       e.preventDefault();
+      var cont = document.getElementsByClassName("tool-tip_info");
       addPopup(toolTip,toolTipResource);
+      if(cont.length > 1){
+        var z = toolTipResource.nextSibling;
+        toolTip.removeChild(z);
+      }
     });
 
     article.appendChild(headerArticle);
@@ -126,25 +127,25 @@
     var arrayTexto = texto.split(",");
     arrayTexto.forEach(function(e,i){
       if (!/^\s+$/.test(e) && e !="" ){
-        var span = document.createElement("span");
+        var contentResource = document.createElement("span");
         var aRemove = document.createElement("a");
         aRemove.setAttribute("class","remove");
         aRemove.innerHTML = "x";
 
         aRemove.addEventListener('click',function(e) {
           e.preventDefault();
-          deleteResource(toolTipResource,span);
+          deleteResource(toolTipResource,contentResource);
         });
 
-        span.innerHTML = e;
-        toolTipResource.appendChild(span);
-        span.appendChild(aRemove);
+        contentResource.innerHTML = e;
+        toolTipResource.appendChild(contentResource);
+        contentResource.appendChild(aRemove);
       }
     });
   }
 
-  function deleteResource(toolTipResource,span){
-    toolTipResource.removeChild(span);
+  function deleteResource(toolTipResource,contentResource){
+    toolTipResource.removeChild(contentResource);
   }
 
 //});
