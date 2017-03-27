@@ -56,7 +56,7 @@
       toolTipInfo.style.display = "none";
     });
 
-    closeToolTip.addEventListener('click',function(e){
+      closeToolTip.addEventListener('click',function(e){
       e.preventDefault();
       toolTipInfo.style.display = "none";
     });
