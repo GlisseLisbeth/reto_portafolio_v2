@@ -108,14 +108,12 @@
     sectionContent.appendChild(circle);
     sectionContent.appendChild(article);
     sectionLeft.appendChild(sectionContent);
-
-
   }
 
   function addResource(toolTipResource,texto){
     var arrayTexto = texto.split(",");
     arrayTexto.forEach(function(e,i){
-      if(e != ""){
+      if (!/^\s+$/.test(e) && e !="" ){
         var span = document.createElement("span");
         var aRemove = document.createElement("a");
         aRemove.setAttribute("class","remove");
