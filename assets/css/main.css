@@ -62,6 +62,7 @@ body, html{
   text-decoration: none;
   border: 2px solid #3597c8;
   margin-left: 7px;
+  cursor: pointer;
 }
 
 .circle{
@@ -118,8 +119,7 @@ body, html{
   display: block;
 }
 
-.tool-tip_resource span a, .tool-tip_resource span{
-  cursor: pointer;
+.tool-tip_resource span{
   display: inline-block;
   color: black;
 }
@@ -132,8 +132,7 @@ body, html{
   padding: 5px 10px;
   border-radius: 10px;
   top: 100%;
-  left: 50%;
-  margin-left: -250px;
+  margin-left: 6%;
   margin-top: 10px;
   border: 2px solid #553D00;
   z-index: 1;
@@ -307,4 +306,13 @@ body, html{
   border: 2px solid #000;
   background: #fff;
 	border-top:none;
+}
+
+.deny{
+  float:right;
+}
+
+.aDeny{
+  float:right;
+  color: #16191b;
 }

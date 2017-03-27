@@ -16,7 +16,6 @@
   })
 
   function addPopup(toolTip,toolTipResource){
-    var texto="";
     var toolTipInfo = document.createElement("div");
     toolTipInfo.setAttribute("class","tool-tip_info");
 
@@ -63,7 +62,6 @@
     });
 
     toolTip.appendChild(toolTipInfo);
-    return texto;
   }
 
   function addArticle(index,color){
@@ -98,6 +96,20 @@
     var tXtResource = document.createElement("span");
     tXtResource.innerHTML = "| Resources";
     toolTipResource.appendChild(tXtResource);
+    var deny = document.createElement("span");
+
+    if(color=="green"){
+      var deny = document.createElement("span");
+      deny.innerHTML="Deny";
+      deny.setAttribute("class","deny");
+      var aDeny = document.createElement("i");
+      aDeny.setAttribute("class","material-icons aDeny");
+      aDeny.setAttribute("style","font-size:16px");
+      aDeny.innerHTML = "block";
+      toolTipResource.appendChild(deny);
+      toolTipResource.appendChild(aDeny);
+      }
+
     aSpecify.addEventListener("click", function(e){
       e.preventDefault();
       addPopup(toolTip,toolTipResource);
