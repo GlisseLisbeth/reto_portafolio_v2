@@ -21,10 +21,6 @@ function AgentModule(){
     return all;
   }
 
-  this.addResources =function()
-  var resource = {
-
-  }
 }
 
 if(exports != undefined){
