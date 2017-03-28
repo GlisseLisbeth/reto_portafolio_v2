@@ -34,7 +34,6 @@ window.addEventListener('load',function(){
     iToolTip.style.width = "470px";
     iToolTip.innerHTML = "</br>";
     toolTipInfo.style.display = "block";
-    iToolTip.focus();
     sToolTip.appendChild(iToolTip);
 
     var addButtonResource = document.createElement("button");
