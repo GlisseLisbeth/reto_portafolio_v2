@@ -24,16 +24,14 @@
     iToolTip.setAttribute("type","text");
     iToolTip.style.width = "470px";
     iToolTip.innerHTML = "</br>";
-
     toolTipInfo.style.display = "block";
-
+    iToolTip.focus();
     sToolTip.appendChild(iToolTip);
 
     var addButtonResource = document.createElement("button");
     addButtonResource.setAttribute("id","add");
     addButtonResource.setAttribute("type","button");
     addButtonResource.setAttribute("class","button-resource");
-    // addButtonResource.innerHTML= "Add resources";
     addButtonResource.appendChild(document.createTextNode("Add resources"));
     toolTipInfo.appendChild(addButtonResource);
 
@@ -49,7 +47,6 @@
       addResource(toolTipResource,iToolTip.value);
       toolTipInfo.style.display = "none";
       toolTip.removeChild(toolTipInfo);
-
     });
 
       closeToolTip.addEventListener('click',function(e){
@@ -66,9 +63,12 @@
 
     var sectionContent = document.createElement("section");
     sectionContent.setAttribute("class", 'content-left '+color);
+
     var article = document.createElement("article");
+
     var circle = document.createElement("aside");
     circle.setAttribute("class","circle");
+
     var headerArticle = document.createElement("h4");
     headerArticle.innerHTML = arrHeaders[index];
 
@@ -98,22 +98,29 @@
       var deny = document.createElement("span");
       deny.innerHTML="Deny";
       deny.setAttribute("class","deny");
+      toolTipResource.appendChild(deny);
+
       var aDeny = document.createElement("i");
       aDeny.setAttribute("class","material-icons aDeny");
       aDeny.setAttribute("style","font-size:16px");
       aDeny.innerHTML = "block";
-      toolTipResource.appendChild(deny);
       toolTipResource.appendChild(aDeny);
       }
 
     aSpecify.addEventListener("click", function(e){
       e.preventDefault();
+
       var cont = document.getElementsByClassName("tool-tip_info");
       addPopup(toolTip,toolTipResource);
+
       if(cont.length > 1){
-        var z = toolTipResource.nextSibling;
-        toolTip.removeChild(z);
+        var tooltipinfo = toolTipResource.nextSibling;
+        toolTip.removeChild(tooltipinfo);
+        alert("Close Popup");
       }
+
+      var iToolTipText = document.getElementById("toolTipText");
+      iToolTipText.focus();
     });
 
     article.appendChild(headerArticle);
@@ -125,8 +132,8 @@
 
   function addResource(toolTipResource,texto){
     var arrayTexto = texto.split(",");
-    arrayTexto.forEach(function(e,i){
-      if (!/^\s+$/.test(e) && e !="" ){
+    arrayTexto.forEach(function(a, p, i){
+      if (!/^\s+$/.test(a) && a !="" && a != p){
         var contentResource = document.createElement("span");
         var aRemove = document.createElement("a");
         aRemove.setAttribute("class","remove");
@@ -137,7 +144,7 @@
           deleteResource(toolTipResource,contentResource);
         });
 
-        contentResource.innerHTML = e;
+        contentResource.innerHTML = a;
         toolTipResource.appendChild(contentResource);
         contentResource.appendChild(aRemove);
       }
