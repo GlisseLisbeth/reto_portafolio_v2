@@ -1,14 +1,23 @@
-//window.addEventListener('load',function(){
-  var arrHeaders = ["dmngbgr00.thoughtworks.com          |<span>ide          |</span><span>192.168.0.1    |</span>        var/lib/cruise-agent",
-  "dmngbgr01.thoughtworks.com          |<span>building          |</span><span>192.168.0.1    |</span>        var/lib/cruise-agent",
-  "dmngbgr02.thoughtworks.com          |<span>building          |</span><span>192.168.0.1    |</span>        var/lib/cruise-agent",
-  "dmngbgr03.thoughtworks.com          |<span>ide          |</span><span>192.168.0.1    |</span>        var/lib/cruise-agent"];
+window.addEventListener('load',function(){
+  var validAgents=getItemFromStorage("agents");
+  var agentModule= new AgentModule();
+  if (validAgents != null) {
+    validAgents.forEach(function(agent) {
+      agentModule.addAgents(agent.url, agent.state,agent.ipaddress, agent.path);
+    },this);
+  }
 
-  arrHeaders.forEach(function(e,i) {
+  var arrHeaders =agentModule.getArray();
+  agentModule.agents.forEach(function(e,i) {
     var color;
-    (i==0 || i == 3) ? color = "green" : color = "yellow";
+    if(e.state =="idle"){
+      color = "green";
+    }
+    else if(e.state =="building"){
+      color = "yellow";
+    }
     addArticle(i,color);
-  })
+  });
 
   function addPopup(toolTip,toolTipResource){
     var toolTipInfo = document.createElement("div");
@@ -147,5 +156,4 @@
   function deleteResource(toolTipResource,contentResource){
     toolTipResource.removeChild(contentResource);
   }
-
-//});
+});
