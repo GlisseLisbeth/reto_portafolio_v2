@@ -1,3 +1,4 @@
+media="screen and (min-width: 1024px)
 *{
   margin:0;
   padding:0;
@@ -7,6 +8,10 @@ body, html{
   font-family: 'Open sans', sans-serif;
   font-size: 14px;
   margin: -32px 24px 15px 1px;
+}
+
+body{
+  min-width: 1024px;
 }
 
 a{

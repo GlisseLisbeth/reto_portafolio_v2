@@ -141,34 +141,50 @@ window.addEventListener('load',function(){
 
   function addResource(toolTipResource,texto){
     var arrayTexto = texto.split(",");
-    arrayTexto.forEach(function(e,i){
+
+    var element = toolTipResource.parentNode.parentNode.firstChild.innerHTML;
+    var position = getPosition(arrHeaders,element);
+
+    var pos = 0;
+    agentModule.agents[position].resources.forEach( function( element ) {
+        while( ( pos = arrayTexto.indexOf( element ) ) >= 0 ) {
+            arrayTexto.splice( pos, 1 );
+            alert("Don't enter duplicate resources")
+        }
+    } );
+
+    arrayTexto.unique().forEach(function(e,i){
       if (!/^\s+$/.test(e) && e !="" ){
-        var element = toolTipResource.parentNode.parentNode.firstChild.innerHTML;
-        var position = arrHeaders.map(function(elem,i) {
-          return(elem==element)?i:-1;
-        }).reduce(function(ant,act){
-          return (ant==-1)?act:ant;
-        });
         agentModule.agents[position].addElement(e);
-
-        var contentResource = document.createElement("span");
-        var aRemove = document.createElement("a");
-        aRemove.setAttribute("class","remove");
-        aRemove.innerHTML = "x";
-
-        aRemove.addEventListener('click',function(e) {
-          e.preventDefault();
-          deleteResource(toolTipResource,contentResource);
-        });
-
-        contentResource.innerHTML = e;
-        toolTipResource.appendChild(contentResource);
-        contentResource.appendChild(aRemove);
       }
+    });
+    agentModule.agents[position].resources.forEach(function(resource,i){
+        if(!document.getElementById("resource-"+position+i))
+        {
+          var contentResource = document.createElement("span");
+          contentResource.setAttribute("id","resource-"+position+i)
+          var aRemove = document.createElement("a");
+          aRemove.setAttribute("class","remove");
+          aRemove.innerHTML = "x";
+          aRemove.addEventListener('click',function(e) {
+            e.preventDefault();
+            var textSearch = e.target.parentNode.textContent;
+            var elementRemove = e.target.parentNode.parentNode.parentNode.parentNode.firstChild.innerHTML;
+            var positionRemove = getPosition(arrHeaders,elementRemove);
+            if(agentModule.agents[positionRemove].deleteElement(textSearch)){
+              deleteResource(toolTipResource,contentResource);
+            }
+              console.log(agentModule.agents[position]);
+            });
+          contentResource.innerHTML = resource;
+          contentResource.appendChild(aRemove);
+          toolTipResource.appendChild(contentResource);
+        }
     });
   }
 
   function deleteResource(toolTipResource,contentResource){
     toolTipResource.removeChild(contentResource);
   }
+
 });
