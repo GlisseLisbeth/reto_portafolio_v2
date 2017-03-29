@@ -3,8 +3,9 @@ window.addEventListener('load',function(){
   var agentModule= new AgentModule();
   if (validAgents != null) {
     validAgents.forEach(function(agent) {
-      agentModule.addAgents(agent.url, agent.state,agent.ipaddress, agent.path);
-    },this);
+      var agent = new Agent(agent.url, agent.state,agent.ipaddress, agent.path);
+      agentModule.addAgents(agent);
+    });
   }
 
   var arrHeaders =agentModule.getArray();
@@ -142,6 +143,15 @@ window.addEventListener('load',function(){
     var arrayTexto = texto.split(",");
     arrayTexto.forEach(function(a, p, i){
       if (!/^\s+$/.test(a) && a !="" && a != p){
+
+        var element = toolTipResource.parentNode.parentNode.firstChild.innerHTML;
+        var position = arrHeaders.map(function(elem,i) {
+          return(elem==element)?i:-1;
+        }).reduce(function(ant,act){
+          return (ant==-1)?act:ant;
+        });
+        agentModule.agents[position].addElement(e);
+
         var contentResource = document.createElement("span");
         var aRemove = document.createElement("a");
         aRemove.setAttribute("class","remove");
