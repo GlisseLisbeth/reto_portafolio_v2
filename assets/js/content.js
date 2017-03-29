@@ -58,7 +58,7 @@ window.addEventListener('load',function(){
       toolTip.removeChild(toolTipInfo);
     });
 
-      closeToolTip.addEventListener('click',function(e){
+    closeToolTip.addEventListener('click',function(e){
       e.preventDefault();
       toolTip.removeChild(toolTipInfo);
     });
@@ -114,7 +114,7 @@ window.addEventListener('load',function(){
       aDeny.setAttribute("style","font-size:16px");
       aDeny.innerHTML = "block";
       toolTipResource.appendChild(aDeny);
-      }
+    }
 
     aSpecify.addEventListener("click", function(e){
       e.preventDefault();
@@ -141,9 +141,8 @@ window.addEventListener('load',function(){
 
   function addResource(toolTipResource,texto){
     var arrayTexto = texto.split(",");
-    arrayTexto.forEach(function(a, p, i){
-      if (!/^\s+$/.test(a) && a !="" && a != p){
-
+    arrayTexto.forEach(function(e,i){
+      if (!/^\s+$/.test(e) && e !="" ){
         var element = toolTipResource.parentNode.parentNode.firstChild.innerHTML;
         var position = arrHeaders.map(function(elem,i) {
           return(elem==element)?i:-1;
@@ -162,7 +161,7 @@ window.addEventListener('load',function(){
           deleteResource(toolTipResource,contentResource);
         });
 
-        contentResource.innerHTML = a;
+        contentResource.innerHTML = e;
         toolTipResource.appendChild(contentResource);
         contentResource.appendChild(aRemove);
       }
