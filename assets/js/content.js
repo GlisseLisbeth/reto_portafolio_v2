@@ -67,6 +67,7 @@ window.addEventListener('load',function(){
   }
 
   function addArticle(index,color){
+    var fragment = document.createDocumentFragment();
     var sectionLeft = document.getElementById("left");
     sectionLeft.setAttribute("class","left");
 
@@ -137,6 +138,8 @@ window.addEventListener('load',function(){
     sectionContent.appendChild(circle);
     sectionContent.appendChild(article);
     sectionLeft.appendChild(sectionContent);
+    fragment.appendChild(sectionLeft);
+    document.getElementById('content-agents').appendChild(fragment);
   }
 
   function addResource(toolTipResource,texto){
